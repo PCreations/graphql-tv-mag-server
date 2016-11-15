@@ -14,6 +14,9 @@ import {
   GraphQLInterfaceType
 } from 'graphql';
 
+import { pubsub } from './subscriptions.js'
+
+
 const fetch = url => isoFetch(url, {
   headers: {
     'Authorization': `Basic ${new Buffer('PCreations:3f3dd8a779ecabf253872bcfbebcd63c3bd83d4e').toString('base64')}`
@@ -205,21 +208,42 @@ const Mutation = new GraphQLObjectType({
       type: GraphQLInt,
       description: "Increments the counter",
       resolve: function() {
+        function sleep(ms) {
+          return new Promise(resolve => setTimeout(resolve, ms));
+        }
         return counterRef.transaction(counter => {
           console.log("counter", counter)
           if (counter !== null) {
             counter += 1
           }
           return counter
-        }).then(({ snapshot }) => snapshot.val())
+        }).then(({ snapshot }) => {
+          const val = snapshot.val()
+          pubsub.publish('counterIncremented', val)
+          return val
+        })
       }
-    },
+    }
   }
 });
 
+const Subscription = new GraphQLObjectType({
+  name: "Subscriptions",
+  fields: {
+    counterIncremented: {
+      type: GraphQLInt,
+      args: {
+        value: { type: GraphQLInt }
+      },
+      resolve: value => value
+    }
+  }
+})
+
 const Schema = new GraphQLSchema({
   query: Query,
-  mutation: Mutation
+  mutation: Mutation,
+  subscription: Subscription
 });
 
 export default Schema;
