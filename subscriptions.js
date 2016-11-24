@@ -8,7 +8,7 @@ const subscriptionManager = new SubscriptionManager({
   pubsub,
   setupFunctions: {
     counterIncremented: (options, args) => ({
-      counterIncremented: value => true  // since we have only one counter, we want to run the subscription each time
+      counterIncremented: value => true  // since we have only one counter, we want to run the subscription every time
     }),
   },
 });

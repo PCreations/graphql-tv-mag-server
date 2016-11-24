@@ -9,8 +9,8 @@
 6 silly lifecycle github-graphql-server@1.0.0~prestart: no script for prestart, continuing
 7 info lifecycle github-graphql-server@1.0.0~start: github-graphql-server@1.0.0
 8 verbose lifecycle github-graphql-server@1.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle github-graphql-server@1.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/Pierre/Repositories/Pro/Figaro/poc-archi-ssr-css/github-graphql-server/node_modules/.bin:/usr/local/Cellar/node/6.2.1/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:/usr/local/heroku/bin:/Applications/MAMP/bin/php/php5.5.3/bin/:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Library/PostgreSQL/9.3/bin:/Users/Pierre/Logiciels/chromedriver:/usr/local/git/bin:/usr/local/opt/android-sdk/tools:/usr/local/opt/android-sdk/platform-tools
-10 verbose lifecycle github-graphql-server@1.0.0~start: CWD: /Users/Pierre/Repositories/Pro/Figaro/poc-archi-ssr-css/github-graphql-server
+9 verbose lifecycle github-graphql-server@1.0.0~start: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Users/Pierre/Repositories/Pro/Figaro/poc-tvmag-graphql-server/node_modules/.bin:/usr/local/Cellar/node/6.2.1/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:/usr/local/heroku/bin:/Applications/MAMP/bin/php/php5.5.3/bin/:/opt/local/bin:/opt/local/sbin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Library/PostgreSQL/9.3/bin:/Users/Pierre/Logiciels/chromedriver:/usr/local/git/bin:/usr/local/opt/android-sdk/tools:/usr/local/opt/android-sdk/platform-tools
+10 verbose lifecycle github-graphql-server@1.0.0~start: CWD: /Users/Pierre/Repositories/Pro/Figaro/poc-tvmag-graphql-server
 11 silly lifecycle github-graphql-server@1.0.0~start: Args: [ '-c', 'babel-node index.js' ]
 12 silly lifecycle github-graphql-server@1.0.0~start: Returned: code: 1  signal: null
 13 info lifecycle github-graphql-server@1.0.0~start: Failed to exec start script
@@ -25,7 +25,7 @@
 14 verbose stack     at maybeClose (internal/child_process.js:852:16)
 14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
 15 verbose pkgid github-graphql-server@1.0.0
-16 verbose cwd /Users/Pierre/Repositories/Pro/Figaro/poc-archi-ssr-css/github-graphql-server
+16 verbose cwd /Users/Pierre/Repositories/Pro/Figaro/poc-tvmag-graphql-server
 17 error Darwin 16.1.0
 18 error argv "/usr/local/Cellar/node/6.2.1/bin/node" "/usr/local/bin/npm" "start"
 19 error node v6.2.1

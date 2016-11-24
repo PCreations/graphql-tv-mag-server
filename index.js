@@ -1,10 +1,10 @@
 import express from 'express';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
-import { SubscriptionServer } from 'subscriptions-transport-ws';
-import bodyParser from 'body-parser';
 import { createServer } from 'http';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
+import { subscriptionManager } from './subscriptions';
+import bodyParser from 'body-parser';
 
-import { subscriptionManager } from './subscriptions.js';
 import schema from './schema'
 
 const PORT = 3000;
@@ -33,6 +33,16 @@ app.use('/graphql', graphqlExpress(req => {
 app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql'
 }));
+
+app.route('/fb')
+  .post((req, res) => {
+    console.log("post receive");
+    console.log(req.body);
+    return res.status(200).send('ok')
+  })
+  .get((req, res) => {
+    return res.status(200).send(req.query['hub.challenge'])
+  })
 
 
 app.listen(PORT, () => console.log(`API Server is now running on http://localhost:${PORT}`));
