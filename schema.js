@@ -16,8 +16,8 @@ import {
 const API_TVMAG_ROOT = 'http://api-tvmag.lefigaro.fr/'
 const PRIME_TIME_ENDPOINT = 'http://api-tvmag.lefigaro.fr/1.0/schedules/prime-time?is_default=1'
 const HEADLINES_ENDPOINT = 'http://api.fidji.lefigaro.fr/export/articles/?source=tvmag.lefigaro.fr&type=ART&type=LIV&limit=25&full=0&oneprofile=1&mediaref=1&section_id=36001'
-const SERIES_HEADLINES_ENDPOINT = 'http://api.fidji.lefigaro.fr/export/articles/?source=tvmag.lefigaro.fr&type=ART&section=S%C3%A9ries&limit=3&full=0&oneprofile=1&mediaref=1'
-const PEOPLE_HEADLINES_ENDPOINT = 'http://api.fidji.lefigaro.fr/export/articles/?source=tvmag.lefigaro.fr&limit=6&full=0&oneprofile=1&mediaref=1&section_id=36006'
+const SERIES_HEADLINES_ENDPOINT = 'http://api.fidji.lefigaro.fr/export/articles/?source=tvmag.lefigaro.fr&type=ART&section=S%C3%A9ries&limit=9&full=0&oneprofile=1&mediaref=1'
+const PEOPLE_HEADLINES_ENDPOINT = 'http://api.fidji.lefigaro.fr/export/articles/?source=tvmag.lefigaro.fr&limit=13&full=0&oneprofile=1&mediaref=1&section_id=36006'
 
 const HeadlinesType = new GraphQLEnumType({
   name: 'HeadlinesType',
@@ -61,30 +61,38 @@ const Query = new GraphQLObjectType({
   fields: () => ({
     tonightPrograms: {
       type: new GraphQLList(Program),
-      resolve: () => (
+      args: {
+        offset: { type: GraphQLInt },
+        limit: { type: GraphQLInt },
+      },
+      resolve: (root, { offset = 0, limit = 0 }) => (
         fetch(PRIME_TIME_ENDPOINT)
         .then(res => res.json())
-        .then(jsonRes => jsonRes.schedules.slice(0,6).map(schedule => {
-          const broadcast = schedule.broadcasts[0]
-          const program = broadcast.program
-          return {
-            channel: schedule.name,
-            thumbnail: `${API_TVMAG_ROOT}${program.photos[0]}`,
-            title: program.title,
-            startAt: broadcast.start_at
-          }
-        }))
+        .then(jsonRes => {
+          return (jsonRes.schedules.slice(offset,limit+offset).map(schedule => {
+            const broadcast = schedule.broadcasts[0]
+            const program = broadcast.program
+            return {
+              channel: schedule.name,
+              thumbnail: `${API_TVMAG_ROOT}${program.photos[0]}`,
+              title: program.title,
+              startAt: broadcast.start_at
+            }
+          }))
+        })
       )
     },
     headlines: {
       type: new GraphQLList(ArticleExcerpt),
       args: {
-        type: { type: HeadlinesType }
+        type: { type: HeadlinesType },
+        offset: { type: GraphQLInt },
+        limit: { type: GraphQLInt },
       },
-      resolve: (root, { type }) => (
+      resolve: (root, { type, offset, limit }) => (
         fetch(headlinesEndpoints[type])
         .then(res => res.json())
-        .then(jsonRes => jsonRes.news.feed.map(feedEntry => {
+        .then(jsonRes => jsonRes.news.feed.slice(offset, limit+offset).map(feedEntry => {
           return {
             time: feedEntry.modified,
             thumbnail: feedEntry.default.image,

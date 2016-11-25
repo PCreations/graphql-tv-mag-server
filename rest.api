@@ -6,6 +6,6 @@ http://api.fidji.lefigaro.fr/export/articles/?source=tvmag.lefigaro.fr&type=ART&
 
 http://api.fidji.lefigaro.fr/export/articles/?source=tvmag.lefigaro.fr&type=QCM&limit=1&full=0&oneprofile=1&mediaref=1&section_id=36001 // Sondage
 
-http://api.fidji.lefigaro.fr/export/articles/?source=tvmag.lefigaro.fr&limit=6&full=0&oneprofile=1&mediaref=1&section_id=36006 // Actu people
+http://api.fidji.lefigaro.fr/export/articles/?source=tvmag.lefigaro.fr&limit=13&full=0&oneprofile=1&mediaref=1&section_id=36006 // Actu people
 
 http://api-tvmag.lefigaro.fr/1.0/schedules/prime-time?sort=-review_grade // Ce soir à la tv
