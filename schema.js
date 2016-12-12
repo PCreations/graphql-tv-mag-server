@@ -35,9 +35,16 @@ const ArticleExcerpt = new GraphQLObjectType({
   name: 'ArticleExcerpt',
   description: 'An article excerpt',
   fields: () => ({
-    time: { type: GraphQLString, description: 'A date string' },
+    time: {type: GraphQLString, description: 'A date string' },
     thumbnail: { type: GraphQLString },
-    title: { type: GraphQLString },
+    title: {
+      type: GraphQLString,
+      args: {
+        size: { type: GraphQLInt }
+      },
+      resolve: (root, { size }) => root.title.slice(0, size),
+      isDeprecated: true
+    },
     description: { type: GraphQLString }
   })
 })
